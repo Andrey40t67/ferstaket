@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Иллюзии на сайте</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 200%;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            height: 150vh; /* Длинная страница для прокрутки */
+            position: relative;
+        }
+
+        .scroll-effect {
+            height: 100vh;
+            background-color: lightblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+        }
+
+        .scroll-effect:nth-of-type(2) {
+            background-color: lightgreen;
+        }
+
+        .scroll-effect:nth-of-type(3) {
+            background-color: lightcoral;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .open-window-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #0078d7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="scroll-effect">Страница 1</div>
+        <div class="scroll-effect">Страница 2</div>
+        <div class="scroll-effect">Страница 3</div>
+    </div>
+
+    <button class="scroll-to-top">Наверх</button>
+    <button class="open-window-btn">Открыть окно</button>
+
+    <script>
+        // Открыть новое окно браузера
+        document.querySelector('.open-window-btn').addEventListener('click', () => {
+            const features = "width=400,height=300,left=100,top=100,scrollbars=yes,resizable=yes";
+            const newWindow = window.open("", "newWindow", features);
+            newWindow.document.write(`
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Новое окно</title>
+                    <style>
+                        body {
+                            margin: 0;
+                            font-family: Arial, sans-serif;
+                            background-color: #e0e0e0;
+                            color: #333;
+                        }
+                        .header {
+                            background-color: #0078d7;
+                            color: white;
+                            padding: 10px;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+                        .header .close-btn {
+                            background: red;
+                            color: white;
+                            border: none;
+                            border-radius: 3px;
+                            width: 20px;
+                            height: 20px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            font-size: 14px;
+                            line-height: 1;
+                        }
+                        .content {
+                            padding: 10px;
+                            text-align: center;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <span>Window Title</span>
+                        <button class="close-btn">&times;</button>
+                    </div>
+                    <div class="content">
+                        LOL
+                    </div>
+                    <script>
+                        document.querySelector('.close-btn').addEventListener('click', () => {
+                            window.close();
+                        });
+                    </script>
+                </body>
+                </html>
+            `);
+        });
+
+        // Кнопка "Наверх"
+        document.querySelector('.scroll-to-top').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
